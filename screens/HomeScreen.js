@@ -1,28 +1,42 @@
 import React, { useLayoutEffect } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { auth, db } from '../firebase'
 import { Avatar } from 'react-native-elements'
+import { TouchableOpacity } from 'react-native'
+import CustomListItem from '../components/CustomListItem'
 
 const HomeScreen = ( { navigation }) => {
+
+    const signOutUser = () => {
+        auth.signOut().then( () => {
+            navigation.replace('Login')
+        })
+    }
+
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "MyProudcts App",
+            title: "MyProudcts",
             headerStyle: { backgroundColor: "#fff"},
             headerTitleStyle: { color: "black"},
             headerTintColor: "black",
             headerLeft: () => (
                 <View style={{ marginLeft:20 }}>
-                    <Avatar rounded source={{ uri: auth?.currentUser?.photoURL }} />
+                    <TouchableOpacity onPress={signOutUser} activeOpacity={0.5}>
+                        <Avatar rounded source={{ uri: auth?.currentUser?.photoURL }} />
+                    </TouchableOpacity>
                 </View>
-            )
+            ),
+
 
         })
     }, [])
 
     return (
-        <View>
-            <Text>This is the Home Screen</Text>
-        </View>
+        <SafeAreaView>
+            <ScrollView>
+                <CustomListItem />
+            </ScrollView>
+        </SafeAreaView>
     )
 }
 
