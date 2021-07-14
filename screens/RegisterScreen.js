@@ -51,7 +51,7 @@ const RegisterScreen = ({ navigation }) => {
                 />
                 <Input 
                     placeholder="Password"
-                    type='date'
+                    type='password'
                     secureTextEntry
                     value={password}
                     onChangeText={ (text) => setPassword(text)}
