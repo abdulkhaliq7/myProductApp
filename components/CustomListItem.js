@@ -2,23 +2,24 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Button, Input, Image, ListItem } from 'react-native-elements'
 
-const CustomListItem = () => {
+
+const CustomListItem = ({ id, productName, productDescription, productPrice, productImageUrl }) => {
+    const image = {uri: productImageUrl}
+
     return (
-        <ListItem>
-            <Image source={{
-                uri: "https://i.ytimg.com/vi/fU5eKGNCT30/maxresdefault.jpg",
-                }} 
+        <ListItem key={id} bottomDivider>
+            <Image source={image} 
                 style={{ width: 150, height: 150}}
             />
             <ListItem.Content>
                 <ListItem.Title style={{ color: 'black', fontWeight: 'bold', paddingBottom: 5 }}>
-                    Rolls Royce Wraith
+                    {productName}
                 </ListItem.Title>
                 <ListItem.Subtitle>
-                Rolls-Royce Wraith offers the utmost in luxury and comfort. 
+                    {productDescription}
                 </ListItem.Subtitle>
                 <ListItem.Subtitle style={{ color: 'black', fontWeight: 'bold', paddingTop: 5 }}>
-                    $200k
+                    {productPrice}
                 </ListItem.Subtitle>
                 <ListItem.Subtitle style={{ marginTop: 7 }}>
                  <Button  containerStyle={styles.button} title='Update'/>

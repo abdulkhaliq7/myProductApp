@@ -5,10 +5,10 @@ import { Avatar } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native'
 import CustomListItem from '../components/CustomListItem'
 import { AntDesign, SimpleLineIcons } from "@expo/vector-icons"
-import { db } from "../firebase"
 
 const HomeScreen = ( { navigation }) => {
     const [products, setProducts] = useState([])
+    // console.log(products)
 
     const signOutUser = () => {
         auth.signOut().then( () => {
@@ -17,7 +17,15 @@ const HomeScreen = ( { navigation }) => {
     }
     
     useEffect(() => {
-        
+        const unsubscribe = db.collection('products').onSnapshot(snapshot => {
+            // console.log(snapshot.docs[0])
+            setProducts(snapshot.docs.map(doc => ({
+                id: doc.id,
+                data: doc.data()
+            })))
+        })
+
+        return unsubscribe
     }, [])
 
     useLayoutEffect(() => {
@@ -57,8 +65,10 @@ const HomeScreen = ( { navigation }) => {
 
     return (
         <SafeAreaView>
-            <ScrollView>
-                <CustomListItem />
+            <ScrollView style={styles.container}>
+                {products.map(({id, data: { productName, productDescription, productPrice, productImageUrl }}) => (
+                    <CustomListItem key={id} id={id} productName={productName} productDescription={productDescription} productPrice={productPrice} productImageUrl={productImageUrl} />
+                ))}
             </ScrollView>
         </SafeAreaView>
     )
@@ -66,4 +76,8 @@ const HomeScreen = ( { navigation }) => {
 
 export default HomeScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        height: "100%"
+    }
+})
