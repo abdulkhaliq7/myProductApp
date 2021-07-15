@@ -13,28 +13,28 @@ const AddProductScreen = ({ navigation }) => {
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "Add a new Product",
+            title: "Update a Product",
             headerBackTitle: "Products",
         })
     }, [])
 
-    const addProduct = async () => {
-        await db.collection('products').add({
-            productName: name,
-            productDescription: description,
-            productPrice: price,
-            productImageUrl: imageUrl
-        }).then(() => {
-            navigation.goBack()
-        }).catch((error) => alert(error))
-    }
+    // const addProduct = async () => {
+    //     await db.collection('products').add({
+    //         productName: name,
+    //         productDescription: description,
+    //         productPrice: price,
+    //         productImageUrl: imageUrl
+    //     }).then(() => {
+    //         navigation.goBack()
+    //     }).catch((error) => alert(error))
+    // }
 
 
     return (
         <KeyboardAvoidingView behavior='padding' style={styles.container} >
             <StatusBar style='light' />
             <Text h3 style={{ marginBottom: 15}}>
-                Add a new Product 
+                Update a Product 
             </Text>
             <View style={styles.inputContainer}>
                 <Input 
@@ -60,14 +60,14 @@ const AddProductScreen = ({ navigation }) => {
                     placeholder="Picture URL"
                     type='text'
                     value={imageUrl}
-                    onSubmitEditing={addProduct}
+                    // onSubmitEditing={addProduct}
                     onChangeText={ (text) => setImageUrl(text)}
                 />
             </View>
             <Button 
                 containerStyle={styles.button}
                 raised 
-                onPress={addProduct} 
+                // onPress={addProduct} 
                 title='Add Product' 
             />
             <View style={{ height: 40}} />

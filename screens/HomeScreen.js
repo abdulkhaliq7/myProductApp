@@ -28,6 +28,13 @@ const HomeScreen = ( { navigation }) => {
         return unsubscribe
     }, [])
 
+    const deleteProduct = async (id) => {
+        db.collection('products').doc(id)
+        .delete().then(() => {
+            console.log("Product Deleted")})
+        .catch((error) => alert(error))
+    }
+
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "MyProudcts",
@@ -50,7 +57,7 @@ const HomeScreen = ( { navigation }) => {
                     marginRight: 20,
                 }}>
                      <TouchableOpacity activeOpacity={0.5}>
-                        <AntDesign name="camerao" size={24} color= "black" />
+                        <AntDesign name="shoppingcart" size={24} color= "black" />
                      </TouchableOpacity>
                      <TouchableOpacity 
                      onPress={() => navigation.navigate('AddProduct')} 
@@ -67,7 +74,7 @@ const HomeScreen = ( { navigation }) => {
         <SafeAreaView>
             <ScrollView style={styles.container}>
                 {products.map(({id, data: { productName, productDescription, productPrice, productImageUrl }}) => (
-                    <CustomListItem key={id} id={id} productName={productName} productDescription={productDescription} productPrice={productPrice} productImageUrl={productImageUrl} />
+                    <CustomListItem key={id} id={id} productName={productName} productDescription={productDescription} productPrice={productPrice} productImageUrl={productImageUrl} deleteProduct={deleteProduct} navigation={navigation} />
                 ))}
             </ScrollView>
         </SafeAreaView>
