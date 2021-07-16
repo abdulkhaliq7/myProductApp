@@ -1,11 +1,13 @@
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { StyleSheet,View } from 'react-native'
 import { Text, Button, Input } from 'react-native-elements'
 import { KeyboardAvoidingView } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import { db } from "../firebase"
 
-const AddProductScreen = ({ navigation }) => {
+const AddProductScreen = ({ route, navigation }) => {
+    const [products, setProducts] = useState([])
+
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [price, setPrice] = useState("")
@@ -18,16 +20,35 @@ const AddProductScreen = ({ navigation }) => {
         })
     }, [])
 
-    // const addProduct = async () => {
-    //     await db.collection('products').add({
-    //         productName: name,
-    //         productDescription: description,
-    //         productPrice: price,
-    //         productImageUrl: imageUrl
-    //     }).then(() => {
-    //         navigation.goBack()
-    //     }).catch((error) => alert(error))
-    // }
+    const  idProduct  = route.params;
+
+
+
+
+    // {console.log({idProduct})}
+    // {console.log(idProduct)}
+
+
+//   { console.log(JSON.stringify(idProduct))}
+
+    // const hala = JSON.stringify(idProduct)
+
+
+
+    const updateProduct = async () => {
+        console.log(idProduct)
+        await db.collection('products')
+        .doc(idProduct)
+        .update({
+            productName: "jumce wanaagsan",
+            // productDescription: description,
+            // productPrice: price,
+            // productImageUrl: imageUrl
+        }).then(() => {
+            // navigation.goBack()
+            console.log('seccessuful')
+        }).catch((error) => alert(error))
+    }
 
 
     return (
@@ -36,6 +57,7 @@ const AddProductScreen = ({ navigation }) => {
             <Text h3 style={{ marginBottom: 15}}>
                 Update a Product 
             </Text>
+            {/* <Text>id: {JSON.stringify(id)}</Text> */}
             <View style={styles.inputContainer}>
                 <Input 
                     placeholder="Name"
@@ -67,8 +89,8 @@ const AddProductScreen = ({ navigation }) => {
             <Button 
                 containerStyle={styles.button}
                 raised 
-                // onPress={addProduct} 
-                title='Add Product' 
+                onPress={updateProduct} 
+                title='Update' 
             />
             <View style={{ height: 40}} />
         </KeyboardAvoidingView>

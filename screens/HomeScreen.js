@@ -29,11 +29,14 @@ const HomeScreen = ( { navigation }) => {
     }, [])
 
     const deleteProduct = async (id) => {
+    // {console.log(id)}
         db.collection('products').doc(id)
         .delete().then(() => {
             console.log("Product Deleted")})
         .catch((error) => alert(error))
     }
+
+
 
     useLayoutEffect(() => {
         navigation.setOptions({

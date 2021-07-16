@@ -68,7 +68,8 @@ const AddProductScreen = ({ navigation }) => {
                 containerStyle={styles.button}
                 raised 
                 onPress={addProduct} 
-                title='Add Product' 
+                title='Add Product'
+                disabled={!name} 
             />
             <View style={{ height: 40}} />
         </KeyboardAvoidingView>

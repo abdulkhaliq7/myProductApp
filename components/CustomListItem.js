@@ -6,7 +6,7 @@ import { TouchableOpacity } from 'react-native'
 import { AntDesign,SimpleLineIcons } from "@expo/vector-icons"
 
 
-const CustomListItem = ({ id, productName, productDescription, productPrice, productImageUrl, deleteProduct, navigation }) => {
+const CustomListItem = ({ id, productName, productDescription, productPrice, productImageUrl, deleteProduct, updateProduct, navigation }) => {
     const image = {uri: productImageUrl}
 
     
@@ -26,7 +26,7 @@ const CustomListItem = ({ id, productName, productDescription, productPrice, pro
                     {productPrice}
                 </ListItem.Subtitle>
                 <ListItem.Subtitle style={{ marginTop: 7 }}>
-                    <TouchableOpacity onPress={() => navigation.navigate('UpdateProduct')} style={{ marginRight:15 }} activeOpacity={0.5}>
+                    <TouchableOpacity onPress={() => navigation.navigate('UpdateProduct', id)} style={{ marginRight:15 }} activeOpacity={0.5}>
                         <AntDesign name="edit" size={30} color= "black" />
                     </TouchableOpacity>
                     <TouchableOpacity 
