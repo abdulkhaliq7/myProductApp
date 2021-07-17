@@ -53,7 +53,7 @@ const AddProductScreen = ({ route, navigation }) => {
         await db.collection('products')
         .doc(idProduct)
         .update({
-            productPrice: price,
+            productPrice: parseInt(price),
         }).then(() => {
             // navigation.goBack()
             alert('Product price updated')

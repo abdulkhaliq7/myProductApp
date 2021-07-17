@@ -22,7 +22,7 @@ const AddProductScreen = ({ navigation }) => {
         await db.collection('products').add({
             productName: name,
             productDescription: description,
-            productPrice: price,
+            productPrice: parseInt(price),
             productImageUrl: imageUrl
         }).then(() => {
             navigation.goBack()

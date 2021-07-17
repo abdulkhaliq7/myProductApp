@@ -25,8 +25,8 @@ const CustomListItem = ({ id, productName, productDescription, productPrice, pro
                 <ListItem.Subtitle style={{ color: 'black', fontWeight: 'bold', paddingTop: 5 }}>
                     {productPrice}
                 </ListItem.Subtitle>
-                <ListItem.Subtitle style={{ marginTop: 7 }}>
-                    <TouchableOpacity onPress={() => navigation.navigate('UpdateProduct', id)} style={{ marginRight:15 }} activeOpacity={0.5}>
+                <ListItem.Subtitle style={{ marginTop: 10 }}>
+                    <TouchableOpacity onPress={() => navigation.navigate('UpdateProduct', id)} style={{ marginRight:20 }} activeOpacity={0.5}>
                         <AntDesign name="edit" size={30} color= "black" />
                     </TouchableOpacity>
                     <TouchableOpacity 
