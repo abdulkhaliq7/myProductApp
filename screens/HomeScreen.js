@@ -17,7 +17,7 @@ const HomeScreen = ( { navigation }) => {
     }
     
     useEffect(() => {
-        const unsubscribe = db.collection('products').onSnapshot(snapshot => {
+        const unsubscribe = db.collection('users').doc(auth?.currentUser?.uid).collection('products').onSnapshot(snapshot => {
             // console.log(snapshot.docs[0])
             setProducts(snapshot.docs.map(doc => ({
                 id: doc.id,
@@ -30,10 +30,14 @@ const HomeScreen = ( { navigation }) => {
 
     const deleteProduct = async (id) => {
     // {console.log(id)}
-        db.collection('products').doc(id)
-        .delete().then(() => {
-            console.log("Product Deleted")})
-        .catch((error) => alert(error))
+        db
+            .collection('users')
+            .doc(auth?.currentUser?.uid)
+            .collection('products')
+            .doc(id)
+            .delete().then(() => {
+                console.log("Product Deleted")})
+            .catch((error) => alert(error))
     }
 
 

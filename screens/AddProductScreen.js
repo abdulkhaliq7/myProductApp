@@ -3,7 +3,7 @@ import { StyleSheet,View } from 'react-native'
 import { Text, Button, Input } from 'react-native-elements'
 import { KeyboardAvoidingView } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
-import { db } from "../firebase"
+import { db,auth } from "../firebase"
 
 const AddProductScreen = ({ navigation }) => {
     const [name, setName] = useState("")
@@ -18,16 +18,39 @@ const AddProductScreen = ({ navigation }) => {
         })
     }, [])
 
+    {console.log( auth?.currentUser?.uid)}
+
+
+
+
+    // const addProduct = async () => {
+    //     await db.collection('products').add({
+    //         productName: name,
+    //         productDescription: description,
+    //         productPrice: parseInt(price),
+    //         productImageUrl: imageUrl
+    //     }).then(() => {
+    //         navigation.goBack()
+    //     }).catch((error) => alert(error))
+    // }
+
     const addProduct = async () => {
-        await db.collection('products').add({
-            productName: name,
-            productDescription: description,
-            productPrice: parseInt(price),
-            productImageUrl: imageUrl
-        }).then(() => {
-            navigation.goBack()
-        }).catch((error) => alert(error))
+        await db.collection('users')
+                .doc(auth?.currentUser?.uid)
+                .collection('products')
+                .add({
+                    productName: name,
+                    productDescription: description,
+                    productPrice: parseInt(price),
+                    productImageUrl: imageUrl
+                })
+                .then(() => {
+                    navigation.goBack()
+                })
+                .catch((error) => alert(error))
     }
+
+    
 
 
     return (

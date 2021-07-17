@@ -3,7 +3,7 @@ import { StyleSheet,View } from 'react-native'
 import { Text, Button, Input } from 'react-native-elements'
 import { KeyboardAvoidingView } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
-import { db } from "../firebase"
+import { db, auth} from "../firebase"
 import { TouchableOpacity } from 'react-native';
 import { AntDesign,SimpleLineIcons } from "@expo/vector-icons"
 
@@ -26,50 +26,67 @@ const AddProductScreen = ({ route, navigation }) => {
     const  idProduct  = route.params;
 
     const updateProductName = async () => {
-        console.log(idProduct)
-        await db.collection('products')
-        .doc(idProduct)
-        .update({
-            productName: name,
-        }).then(() => {
-            // navigation.goBack()
-            alert('Product Name updated')
-        }).catch((error) => alert(error))
+        await db
+                .collection('users')
+                .doc(auth?.currentUser?.uid)
+                .collection('products')
+                .doc(idProduct)
+                .update({
+                    productName: name,
+                })
+                .then(() => {
+                    // navigation.goBack()
+                    alert('Product Name updated')
+                })
+                .catch((error) => alert(error))
     }
 
     const updateProductDesc = async () => {
-        console.log(idProduct)
-        await db.collection('products')
-        .doc(idProduct)
-        .update({
-        }).then(() => {
-            // navigation.goBack()
-            alert('Product Description updated')
-        }).catch((error) => alert(error))
+        await db
+                .collection('users')
+                .doc(auth?.currentUser?.uid)
+                .collection('products')
+                .doc(idProduct)
+                .update({
+                    productDescription:description
+                })
+                .then(() => {
+                    // navigation.goBack()
+                    alert('Product Description updated')
+                })
+                .catch((error) => alert(error))
     }
 
     const updateProductPrice = async () => {
-        console.log(idProduct)
-        await db.collection('products')
-        .doc(idProduct)
-        .update({
-            productPrice: parseInt(price),
-        }).then(() => {
-            // navigation.goBack()
-            alert('Product price updated')
-        }).catch((error) => alert(error))
+        await db
+                .collection('users')
+                .doc(auth?.currentUser?.uid)
+                .collection('products')
+                .doc(idProduct)
+                .update({
+                    productPrice: parseInt(price),
+                })
+                .then(() => {
+                    // navigation.goBack()
+                    alert('Product price updated')
+                })
+                .catch((error) => alert(error))
     }
 
     const updateProductImage = async () => {
-        console.log(idProduct)
-        await db.collection('products')
-        .doc(idProduct)
-        .update({
-            productImageUrl: imageUrl,
-        }).then(() => {
-            // navigation.goBack()
-            alert('Product Image updated')
-        }).catch((error) => alert(error))
+        await db
+                .collection('users')
+                .doc(auth?.currentUser?.uid)
+                .collection('products')
+                .doc(idProduct)
+                .update({
+                    productImageUrl: imageUrl,
+                })
+                .then(() => {
+                    // navigation.goBack()
+                    alert('Product Image updated')
+                })
+                .catch((error) => alert(error))
     }
 
     const updateNameActivation = () => {
