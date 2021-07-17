@@ -33,7 +33,7 @@ const AddProductScreen = ({ route, navigation }) => {
             productName: name,
         }).then(() => {
             // navigation.goBack()
-            console.log('seccessuful')
+            alert('Product Name updated')
         }).catch((error) => alert(error))
     }
 
@@ -44,7 +44,7 @@ const AddProductScreen = ({ route, navigation }) => {
         .update({
         }).then(() => {
             // navigation.goBack()
-            console.log('seccessuful')
+            alert('Product Description updated')
         }).catch((error) => alert(error))
     }
 
@@ -56,7 +56,7 @@ const AddProductScreen = ({ route, navigation }) => {
             productPrice: price,
         }).then(() => {
             // navigation.goBack()
-            console.log('seccessuful')
+            alert('Product price updated')
         }).catch((error) => alert(error))
     }
 
@@ -68,9 +68,42 @@ const AddProductScreen = ({ route, navigation }) => {
             productImageUrl: imageUrl,
         }).then(() => {
             // navigation.goBack()
-            console.log('seccessuful')
+            alert('Product Image updated')
         }).catch((error) => alert(error))
     }
+
+    const updateNameActivation = () => {
+        if(name.length > 2) {
+            updateProductName()
+        } else {
+            alert('Update product')
+        }
+    }
+
+    const updateDescActivation = () => {
+        if(description.length > 2) {
+            updateProductDesc()
+        } else {
+            alert('Update product')
+        }
+    }
+
+    const updatePriceActivation = () => {
+        if(price.length > 2) {
+            updateProductPrice()
+        } else {
+            alert('Update product')
+        }
+    }
+
+    const updateImageActivation = () => {
+        if(imageUrl.length > 2) {
+            updateProductImage()
+        } else {
+            alert('Update product')
+        }
+    }
+
 
     return (
         <KeyboardAvoidingView behavior='padding' style={styles.container} >
@@ -85,15 +118,14 @@ const AddProductScreen = ({ route, navigation }) => {
                         autoFocus
                         type='text'
                         value={name}
-                        // onSubmitEditing={updateProductName}
                         onChangeText={ (text) => setName(text)}
                     />
                     <TouchableOpacity 
                             
-                            onPress={updateProductName} 
+                            onPress={updateNameActivation} 
                             activeOpacity={0.5}
                         >
-                            <AntDesign name="check" size={30} color="black" />
+                            <AntDesign name="check" size={30} color={name.length > 2 ? 'green' : 'red'} />
                     </TouchableOpacity>
                 </View>
                 
@@ -102,14 +134,13 @@ const AddProductScreen = ({ route, navigation }) => {
                         placeholder="Description"
                         type='text'
                         value={description}
-                        // onSubmitEditing={updateProductDesc}
                         onChangeText={ (text) => setDescription(text)}
                     />
                     <TouchableOpacity 
-                            onPress={updateProductDesc} 
+                            onPress={updateDescActivation} 
                             activeOpacity={0.5}
                         >
-                            <AntDesign name="check" size={30} color="black ? black :red" />
+                            <AntDesign name="check" size={30} color={description.length > 2 ? 'green' : 'red'}/>
                     </TouchableOpacity>
                 </View>
 
@@ -121,10 +152,10 @@ const AddProductScreen = ({ route, navigation }) => {
                         onChangeText={ (text) => setPrice(text)}
                     />
                     <TouchableOpacity 
-                            onPress={updateProductPrice} 
+                            onPress={updatePriceActivation} 
                             activeOpacity={0.5}
                         >
-                            <AntDesign name="check" size={30} color="black" />
+                            <AntDesign name="check" size={30} color={price.length > 2 ? 'green' : 'red'} />
                     </TouchableOpacity>
                 </View>
 
@@ -133,14 +164,13 @@ const AddProductScreen = ({ route, navigation }) => {
                         placeholder="Picture URL"
                         type='text'
                         value={imageUrl}
-                        // onSubmitEditing={addProduct}
                         onChangeText={ (text) => setImageUrl(text)}
                     />
                     <TouchableOpacity 
-                            onPress={updateProductImage} 
+                            onPress={updateImageActivation} 
                             activeOpacity={0.5}
                         >
-                            <AntDesign name="check" size={30} color="black" />
+                            <AntDesign name="check" size={30} color={imageUrl.length > 2 ? 'green' : 'red'} />
                     </TouchableOpacity>
                 </View>
             </View>
