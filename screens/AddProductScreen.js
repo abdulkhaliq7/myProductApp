@@ -18,21 +18,8 @@ const AddProductScreen = ({ navigation }) => {
         })
     }, [])
 
-    {console.log( auth?.currentUser?.uid)}
+    // {console.log( auth?.currentUser?.uid)}
 
-
-
-
-    // const addProduct = async () => {
-    //     await db.collection('products').add({
-    //         productName: name,
-    //         productDescription: description,
-    //         productPrice: parseInt(price),
-    //         productImageUrl: imageUrl
-    //     }).then(() => {
-    //         navigation.goBack()
-    //     }).catch((error) => alert(error))
-    // }
 
     const addProduct = async () => {
         await db.collection('users')
@@ -49,9 +36,6 @@ const AddProductScreen = ({ navigation }) => {
                 })
                 .catch((error) => alert(error))
     }
-
-    
-
 
     return (
         <KeyboardAvoidingView behavior='padding' style={styles.container} >

@@ -16,17 +16,17 @@ const CustomListItem = ({ id, productName, productDescription, productPrice, pro
                 style={{ width: 150, height: 150}}
             />
             <ListItem.Content>
-                <ListItem.Title style={{ color: 'black', fontWeight: 'bold', paddingBottom: 5 }}>
+                <ListItem.Title style={{ color: 'black', fontWeight: 'bold', fontSize: 20 ,paddingBottom: 5 }}>
                     {productName}
                 </ListItem.Title>
                 <ListItem.Subtitle>
                     {productDescription}
                 </ListItem.Subtitle>
                 <ListItem.Subtitle style={{ color: 'black', fontWeight: 'bold', paddingTop: 5 }}>
-                    {productPrice}
+                    {"$ "}{productPrice}
                 </ListItem.Subtitle>
-                <ListItem.Subtitle style={{ marginTop: 10 }}>
-                    <TouchableOpacity onPress={() => navigation.navigate('UpdateProduct', id)} style={{ marginRight:20 }} activeOpacity={0.5}>
+                <ListItem.Subtitle style={{ marginTop: 10, flexDirection: "row" }}>
+                    <TouchableOpacity onPress={() => navigation.navigate('UpdateProduct', id)} style={{ marginRight:30 }} activeOpacity={0.5}>
                         <AntDesign name="edit" size={30} color= "black" />
                     </TouchableOpacity>
                     <TouchableOpacity 

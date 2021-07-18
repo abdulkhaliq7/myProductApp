@@ -10,7 +10,7 @@ const RegisterScreen = ({ navigation }) => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    // const [birth, setBirth] = useState("")
+    const [birth, setBirth] = useState("")
     const [imageUrl, setImageUrl] = useState("")
 
     useLayoutEffect(() => {
@@ -56,13 +56,12 @@ const RegisterScreen = ({ navigation }) => {
                     value={password}
                     onChangeText={ (text) => setPassword(text)}
                 />
-                {/* <Input 
+                <Input 
                     placeholder="Birth"
-                    type='password'
-                    secureTextEntry
+                    type='text'
                     value={birth}
                     onChangeText={ (text) => setBirth(text)}
-                /> */}
+                />
                 <Input 
                     placeholder="Profile Picture URL"
                     type='text'
@@ -77,7 +76,7 @@ const RegisterScreen = ({ navigation }) => {
                 onPress={ register } 
                 title='Register' 
             />
-            <View style={{ height: 40}} />
+            <View style={{ height: 80}} />
         </KeyboardAvoidingView>
     ) 
 }

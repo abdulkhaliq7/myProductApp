@@ -11,6 +11,7 @@ import { AntDesign,SimpleLineIcons } from "@expo/vector-icons"
 const AddProductScreen = ({ route, navigation }) => {
     const [products, setProducts] = useState([])
 
+
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [price, setPrice] = useState("")

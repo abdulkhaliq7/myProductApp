@@ -12,14 +12,21 @@ import { AntDesign } from "@expo/vector-icons"
 const UpdateProfileScreen = ({navigation }) => {
     const [username, setUsername] = useState(auth?.currentUser?.displayName)
     const [image, setImage] = useState(auth?.currentUser?.photoURL)
-    const [birth, setBirth] = useState("")
+    const [birth, setBirth] = useState(auth?.currentUser?.phoneNumber)
+
+    
+    {console.log(auth?.currentUser)}
+
+
+
+
 
 
     {console.log(username)}
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "Profile",
+            title: "MyProfile",
             headerStyle: { backgroundColor: "#fff"},
             headerTitleStyle: { color: "black"},
             headerTintColor: "black",
@@ -41,17 +48,20 @@ const UpdateProfileScreen = ({navigation }) => {
         })
     }
 
-    const update = () => {
-        auth?.currentUser?.updateProfile({
+    const update = async () => {
+        await auth?.currentUser?.updateProfile({
             displayName: username,
             photoURL: image,
+        }).then(() => {
+            navigation.goBack()
         })
+        .catch((error) => alert(error))
     }
     
 
     return (
         <KeyboardAvoidingView behavior='padding'  style={styles.container}>
-            <StatusBar style='light' />
+            {/* <StatusBar style='light' />  */}
             <Avatar rounded size='xlarge' source={{ uri: auth?.currentUser?.photoURL}} />
             <Text style={{ fontSize: 17 , marginTop: 10, marginBottom: 10 }} >{auth?.currentUser?.displayName}</Text>
             <View style={styles.inputContainer}>
