@@ -13,7 +13,7 @@ const AddProductScreen = ({ route, navigation }) => {
     const products = route.params
 
     const idProduct = products.id
-    {console.log(typeof(products.productPrice))}
+    // {console.log(typeof(products.productPrice))}
 
     const [name, setName] = useState(products.productName)
     const [description, setDescription] = useState(products.productDescription)

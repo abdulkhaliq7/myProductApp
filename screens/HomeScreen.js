@@ -8,14 +8,6 @@ import { AntDesign, SimpleLineIcons } from "@expo/vector-icons"
 
 const HomeScreen = ( { navigation }) => {
     const [products, setProducts] = useState([])
-    {console.log(products)}
-
-    // const signOutUser = () => {
-    //     auth.signOut().then( () => {
-    //         navigation.replace('Login')
-    //     })
-    // }
-    
 
     useEffect(() => {
         if(auth?.currentUser) {
@@ -38,7 +30,7 @@ const HomeScreen = ( { navigation }) => {
         
     }, [auth?.currentUser])
 
-    {console.log(products)} 
+    // {console.log(products)} 
 
     const deleteProduct = async (id) => {
     // {console.log(id)}
@@ -51,8 +43,6 @@ const HomeScreen = ( { navigation }) => {
                 console.log("Product Deleted")})
             .catch((error) => alert(error))
     }
-
-
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -78,7 +68,9 @@ const HomeScreen = ( { navigation }) => {
                     width: 80,
                     marginRight: 20,
                 }}>
-                    <TouchableOpacity activeOpacity={0.5}>
+                    <TouchableOpacity 
+                        onPress={() => navigation.navigate('dashboard')} 
+                        activeOpacity={0.5}>
                         <AntDesign name="shoppingcart" size={24} color= "black" />
                     </TouchableOpacity>
                     <TouchableOpacity 
@@ -91,6 +83,7 @@ const HomeScreen = ( { navigation }) => {
             )
         })
     }, [navigation])
+
 
     return (
         <SafeAreaView>

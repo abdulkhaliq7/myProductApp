@@ -13,7 +13,7 @@ const AddProductScreen = ({ navigation }) => {
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "Add a new Product",
+            title: "Add new Product",
             headerBackTitle: "Products",
         })
     }, [])
@@ -41,7 +41,7 @@ const AddProductScreen = ({ navigation }) => {
         <KeyboardAvoidingView behavior='padding' style={styles.container} >
             <StatusBar style='light' />
             <Text h3 style={{ marginBottom: 15}}>
-                Add a new Product 
+                Add new Product 
             </Text>
             <View style={styles.inputContainer}>
                 <Input 
@@ -76,7 +76,7 @@ const AddProductScreen = ({ navigation }) => {
                 raised 
                 onPress={addProduct} 
                 title='Add Product'
-                disabled={!name} 
+                // disabled={!name} 
             />
             <View style={{ height: 40}} />
         </KeyboardAvoidingView>

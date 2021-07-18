@@ -6,7 +6,7 @@ import { TouchableOpacity } from 'react-native'
 import { AntDesign,SimpleLineIcons } from "@expo/vector-icons"
 
 
-const CustomListItem = ({ id, productName, productDescription, productPrice, productImageUrl, deleteProduct, updateProduct, navigation }) => {
+const CustomListItem = ({ id, productName, productDescription, productPrice, productImageUrl, deleteProduct, updateProduct, navigation, hideButton }) => {
     const image = {uri: productImageUrl}
 
 
@@ -26,17 +26,19 @@ const CustomListItem = ({ id, productName, productDescription, productPrice, pro
                 <ListItem.Subtitle style={{ color: 'black', fontWeight: 'bold', paddingTop: 5 }}>
                     {"$ "}{productPrice}
                 </ListItem.Subtitle>
-                <ListItem.Subtitle style={{ marginTop: 10, flexDirection: "row" }}>
-                    <TouchableOpacity onPress={() => navigation.navigate('UpdateProduct', {id, productName, productDescription, productPrice, productImageUrl,})} style={{ marginRight:30 }} activeOpacity={0.5}>
-                        <AntDesign name="edit" size={30} color= "black" />
-                    </TouchableOpacity>
-                    <TouchableOpacity 
-                        onPress={() => deleteProduct(id)} 
-                        activeOpacity={0.5}
-                    >
-                        <SimpleLineIcons name="trash" size={30} color="black" />
-                    </TouchableOpacity>
-                </ListItem.Subtitle>
+                {!hideButton && (
+                    <ListItem.Subtitle style={{ marginTop: 10, flexDirection: "row" }}>
+                        <TouchableOpacity onPress={() => navigation.navigate('UpdateProduct', {id, productName, productDescription, productPrice, productImageUrl,})} style={{ marginRight:30 }} activeOpacity={0.5}>
+                            <AntDesign name="edit" size={30} color= "black" />
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                            onPress={() => deleteProduct(id)} 
+                            activeOpacity={0.5}
+                        >
+                            <SimpleLineIcons name="trash" size={30} color="black" />
+                        </TouchableOpacity>
+                    </ListItem.Subtitle>
+                )}
             </ListItem.Content>
         </ListItem>
     )
