@@ -8,25 +8,35 @@ import { AntDesign, SimpleLineIcons } from "@expo/vector-icons"
 
 const HomeScreen = ( { navigation }) => {
     const [products, setProducts] = useState([])
-    // console.log(products)
+    {console.log(products)}
 
-    const signOutUser = () => {
-        auth.signOut().then( () => {
-            navigation.replace('Login')
-        })
-    }
+    // const signOutUser = () => {
+    //     auth.signOut().then( () => {
+    //         navigation.replace('Login')
+    //     })
+    // }
     
+
     useEffect(() => {
-        const unsubscribe = db.collection('users').doc(auth?.currentUser?.uid).collection('products').onSnapshot(snapshot => {
-            // console.log(snapshot.docs[0])
-            setProducts(snapshot.docs.map(doc => ({
-                id: doc.id,
-                data: doc.data()
-            })))
+        if(auth?.currentUser) {
+            const unsubscribe = db
+                                .collection('users')
+                                .doc(auth?.currentUser?.uid)
+                                .collection('products')
+                                .onSnapshot(snapshot => {
+                                    // console.log(snapshot.docs[0])
+                                    setProducts(snapshot.docs.map(doc => ({
+                                        id: doc.id,
+                                        data: doc.data()
+                                    })))
         })
 
         return unsubscribe
-    }, [])
+        } else {
+            setProducts([])
+        }
+        
+    }, [auth?.currentUser])
 
     const deleteProduct = async (id) => {
     // {console.log(id)}
@@ -49,9 +59,12 @@ const HomeScreen = ( { navigation }) => {
             headerTitleStyle: { color: "black"},
             headerTintColor: "black",
             headerLeft: () => (
-                <View style={{ marginLeft:20 }}>
-                    <TouchableOpacity onPress={signOutUser} activeOpacity={0.5}>
+                <View style={{ marginLeft:10, flexDirection: 'row', alignItems: 'center' }} >
+                    <TouchableOpacity onPress={() => navigation.navigate('UpdateProfile')}  activeOpacity={0.5}>
                         <Avatar rounded source={{ uri: auth?.currentUser?.photoURL }} />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('UpdateProfile', products)}  style={{ paddingLeft: 5}}  activeOpacity={0.5}>
+                        <Text>{auth?.currentUser?.displayName}</Text>
                     </TouchableOpacity>
                 </View>
             ),
