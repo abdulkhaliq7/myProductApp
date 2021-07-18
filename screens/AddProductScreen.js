@@ -28,7 +28,7 @@ const AddProductScreen = ({ navigation }) => {
                 .add({
                     productName: name,
                     productDescription: description,
-                    productPrice: parseInt(price),
+                    productPrice: parseFloat(price),
                     productImageUrl: imageUrl
                 })
                 .then(() => {
