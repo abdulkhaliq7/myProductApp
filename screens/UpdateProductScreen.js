@@ -9,13 +9,16 @@ import { AntDesign,SimpleLineIcons } from "@expo/vector-icons"
 
 
 const AddProductScreen = ({ route, navigation }) => {
-    const [products, setProducts] = useState([])
 
+    const products = route.params
 
-    const [name, setName] = useState("")
-    const [description, setDescription] = useState("")
-    const [price, setPrice] = useState("")
-    const [imageUrl, setImageUrl] = useState("")
+    const idProduct = products.id
+    {console.log(products.productPrice)}
+
+    const [name, setName] = useState(products.productName)
+    const [description, setDescription] = useState(products.productDescription)
+    const [price, setPrice] = useState(parseInt(products.productPrice))
+    const [imageUrl, setImageUrl] = useState(products.productImageUrl)
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -24,9 +27,13 @@ const AddProductScreen = ({ route, navigation }) => {
         })
     }, [])
 
-    const  idProduct  = route.params;
+    // const  idProduct = route.params;
 
-    const updateProductName = async () => {
+    // const productName = route.params;
+    
+    
+
+    const updateProduct = async () => {
         await db
                 .collection('users')
                 .doc(auth?.currentUser?.uid)
@@ -34,93 +41,96 @@ const AddProductScreen = ({ route, navigation }) => {
                 .doc(idProduct)
                 .update({
                     productName: name,
-                })
-                .then(() => {
-                    // navigation.goBack()
-                    alert('Product Name updated')
-                })
-                .catch((error) => alert(error))
-    }
-
-    const updateProductDesc = async () => {
-        await db
-                .collection('users')
-                .doc(auth?.currentUser?.uid)
-                .collection('products')
-                .doc(idProduct)
-                .update({
-                    productDescription:description
-                })
-                .then(() => {
-                    // navigation.goBack()
-                    alert('Product Description updated')
-                })
-                .catch((error) => alert(error))
-    }
-
-    const updateProductPrice = async () => {
-        await db
-                .collection('users')
-                .doc(auth?.currentUser?.uid)
-                .collection('products')
-                .doc(idProduct)
-                .update({
+                    productDescription: description,
                     productPrice: parseInt(price),
+                    productImageUrl: imageUrl
                 })
                 .then(() => {
-                    // navigation.goBack()
-                    alert('Product price updated')
+                    navigation.goBack()
+                    // alert('Product Name updated')
                 })
                 .catch((error) => alert(error))
     }
 
-    const updateProductImage = async () => {
-        await db
-                .collection('users')
-                .doc(auth?.currentUser?.uid)
-                .collection('products')
-                .doc(idProduct)
-                .update({
-                    productImageUrl: imageUrl,
-                })
-                .then(() => {
-                    // navigation.goBack()
-                    alert('Product Image updated')
-                })
-                .catch((error) => alert(error))
-    }
+    // const updateProductDesc = async () => {
+    //     await db
+    //             .collection('users')
+    //             .doc(auth?.currentUser?.uid)
+    //             .collection('products')
+    //             .doc(idProduct)
+    //             .update({
+    //                 productDescription:description
+    //             })
+    //             .then(() => {
+    //                 // navigation.goBack()
+    //                 alert('Product Description updated')
+    //             })
+    //             .catch((error) => alert(error))
+    // }
 
-    const updateNameActivation = () => {
-        if(name.length > 2) {
-            updateProductName()
-        } else {
-            alert('Update product')
-        }
-    }
+    // const updateProductPrice = async () => {
+    //     await db
+    //             .collection('users')
+    //             .doc(auth?.currentUser?.uid)
+    //             .collection('products')
+    //             .doc(idProduct)
+    //             .update({
+    //                 productPrice: parseInt(price),
+    //             })
+    //             .then(() => {
+    //                 // navigation.goBack()
+    //                 alert('Product price updated')
+    //             })
+    //             .catch((error) => alert(error))
+    // }
 
-    const updateDescActivation = () => {
-        if(description.length > 2) {
-            updateProductDesc()
-        } else {
-            alert('Update product')
-        }
-    }
+    // const updateProductImage = async () => {
+    //     await db
+    //             .collection('users')
+    //             .doc(auth?.currentUser?.uid)
+    //             .collection('products')
+    //             .doc(idProduct)
+    //             .update({
+    //                 productImageUrl: imageUrl,
+    //             })
+    //             .then(() => {
+    //                 // navigation.goBack()
+    //                 alert('Product Image updated')
+    //             })
+    //             .catch((error) => alert(error))
+    // }
 
-    const updatePriceActivation = () => {
-        if(price.length > 2) {
-            updateProductPrice()
-        } else {
-            alert('Update product')
-        }
-    }
+    // const updateNameActivation = () => {
+    //     if(name.length > 2) {
+    //         updateProductName()
+    //     } else {
+    //         alert('Update product')
+    //     }
+    // }
 
-    const updateImageActivation = () => {
-        if(imageUrl.length > 2) {
-            updateProductImage()
-        } else {
-            alert('Update product')
-        }
-    }
+    // const updateDescActivation = () => {
+    //     if(description.length > 2) {
+    //         updateProductDesc()
+    //     } else {
+    //         alert('Update product')
+    //     }
+    // }
+
+    // const updatePriceActivation = () => {
+    //     if(price.length > 2) {
+    //         updateProductPrice()
+    //     } else {
+    //         alert('Update product')
+    //     }
+    // }
+
+    // const updateImageActivation = () => {
+    //     if(imageUrl.length > 2) {
+    //         updateProductImage()
+    //     } else {
+    //         alert('Update product')
+    //     }
+    // }
 
 
     return (
@@ -138,13 +148,13 @@ const AddProductScreen = ({ route, navigation }) => {
                         value={name}
                         onChangeText={ (text) => setName(text)}
                     />
-                    <TouchableOpacity 
+                    {/* <TouchableOpacity 
                             
                             onPress={updateNameActivation} 
                             activeOpacity={0.5}
                         >
                             <AntDesign name="check" size={30} color={name.length > 2 ? 'green' : 'red'} />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
                 
                 <View style={{ flexDirection: 'row'}}>
@@ -154,12 +164,12 @@ const AddProductScreen = ({ route, navigation }) => {
                         value={description}
                         onChangeText={ (text) => setDescription(text)}
                     />
-                    <TouchableOpacity 
+                    {/* <TouchableOpacity 
                             onPress={updateDescActivation} 
                             activeOpacity={0.5}
                         >
                             <AntDesign name="check" size={30} color={description.length > 2 ? 'green' : 'red'}/>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
 
                 <View style={{ flexDirection: 'row'}}>
@@ -169,12 +179,12 @@ const AddProductScreen = ({ route, navigation }) => {
                         value={price}
                         onChangeText={ (text) => setPrice(text)}
                     />
-                    <TouchableOpacity 
+                    {/* <TouchableOpacity 
                             onPress={updatePriceActivation} 
                             activeOpacity={0.5}
                         >
                             <AntDesign name="check" size={30} color={price.length > 2 ? 'green' : 'red'} />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
 
                 <View style={{ flexDirection: 'row'}}>
@@ -184,14 +194,21 @@ const AddProductScreen = ({ route, navigation }) => {
                         value={imageUrl}
                         onChangeText={ (text) => setImageUrl(text)}
                     />
-                    <TouchableOpacity 
+                    {/* <TouchableOpacity 
                             onPress={updateImageActivation} 
                             activeOpacity={0.5}
                         >
                             <AntDesign name="check" size={30} color={imageUrl.length > 2 ? 'green' : 'red'} />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
             </View>
+            <Button 
+                containerStyle={styles.button}
+                raised 
+                onPress={updateProduct} 
+                title='Update Product'
+                disabled={!name} 
+            />
             <View style={{ height: 40}} />
         </KeyboardAvoidingView>
     ) 

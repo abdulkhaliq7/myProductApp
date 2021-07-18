@@ -9,6 +9,7 @@ import { AntDesign,SimpleLineIcons } from "@expo/vector-icons"
 const CustomListItem = ({ id, productName, productDescription, productPrice, productImageUrl, deleteProduct, updateProduct, navigation }) => {
     const image = {uri: productImageUrl}
 
+
     
     return (
         <ListItem key={id} bottomDivider>
@@ -26,7 +27,7 @@ const CustomListItem = ({ id, productName, productDescription, productPrice, pro
                     {"$ "}{productPrice}
                 </ListItem.Subtitle>
                 <ListItem.Subtitle style={{ marginTop: 10, flexDirection: "row" }}>
-                    <TouchableOpacity onPress={() => navigation.navigate('UpdateProduct', id)} style={{ marginRight:30 }} activeOpacity={0.5}>
+                    <TouchableOpacity onPress={() => navigation.navigate('UpdateProduct', {id, productName, productDescription, productPrice, productImageUrl,})} style={{ marginRight:30 }} activeOpacity={0.5}>
                         <AntDesign name="edit" size={30} color= "black" />
                     </TouchableOpacity>
                     <TouchableOpacity 

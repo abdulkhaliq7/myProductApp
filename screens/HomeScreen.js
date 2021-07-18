@@ -38,6 +38,8 @@ const HomeScreen = ( { navigation }) => {
         
     }, [auth?.currentUser])
 
+    {console.log(products)} 
+
     const deleteProduct = async (id) => {
     // {console.log(id)}
         db
@@ -76,15 +78,15 @@ const HomeScreen = ( { navigation }) => {
                     width: 80,
                     marginRight: 20,
                 }}>
-                     <TouchableOpacity activeOpacity={0.5}>
+                    <TouchableOpacity activeOpacity={0.5}>
                         <AntDesign name="shoppingcart" size={24} color= "black" />
-                     </TouchableOpacity>
-                     <TouchableOpacity 
-                     onPress={() => navigation.navigate('AddProduct')} 
-                     activeOpacity={0.5}
-                     >
-                         <SimpleLineIcons name="plus" size={24} color="black" />
-                     </TouchableOpacity>
+                    </TouchableOpacity>
+                    <TouchableOpacity 
+                        onPress={() => navigation.navigate('AddProduct')} 
+                        activeOpacity={0.5}
+                    >
+                        <SimpleLineIcons name="plus" size={24} color="black" />
+                    </TouchableOpacity>
                 </View>
             )
         })
