@@ -10,6 +10,7 @@ import AddProductScreen from './screens/AddProductScreen';
 import UpdateProductScreen from './screens/UpdateProductScreen';
 import UpdateProfileScreen from './screens/UpdateProfileScreen';
 import dashboardScreen from './screens/dashboardScreen';
+// import BarcodeScannerScreen from './screens/BarcodeScannerScreen';
 
 
 const Stack = createStackNavigator();
@@ -24,7 +25,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator  screenOptions={globalScreenOptions}>
-        <Stack.Screen name='Login' component={LoginScreen} />
+      {/* <Stack.Screen name='Scanner' component={BarcodeScannerScreen} /> */}
+        <Stack.Screen  name='Login' component={LoginScreen} />
         <Stack.Screen name='Register' component={RegisterScreen} />
         <Stack.Screen name='Home' component={HomeScreen} />
         <Stack.Screen name='AddProduct' component={AddProductScreen} />
