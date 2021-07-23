@@ -10,6 +10,8 @@ import AddProductScreen from './screens/AddProductScreen';
 import UpdateProductScreen from './screens/UpdateProductScreen';
 import UpdateProfileScreen from './screens/UpdateProfileScreen';
 import dashboardScreen from './screens/dashboardScreen';
+import QrCodeGenerator from './screens/QrCodeGenerator';
+import QrCodeshare from './screens/QrCodeshare';
 // import BarcodeScannerScreen from './screens/BarcodeScannerScreen';
 
 
@@ -25,6 +27,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator  screenOptions={globalScreenOptions}>
+      {/* <Stack.Screen  name='QrCode' component={QrCodeshare} /> */}
+        {/* <Stack.Screen  name='QrCode' component={QrCodeGenerator} /> */}
       {/* <Stack.Screen name='Scanner' component={BarcodeScannerScreen} /> */}
         <Stack.Screen  name='Login' component={LoginScreen} />
         <Stack.Screen name='Register' component={RegisterScreen} />
