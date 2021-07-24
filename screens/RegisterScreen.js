@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native'
 import { Button, Text, Input } from 'react-native-elements'
 import { KeyboardAvoidingView } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
+import { ScrollView, SafeAreaView } from 'react-native';
 import { auth } from '../firebase'
 
 
@@ -30,54 +31,56 @@ const RegisterScreen = ({ navigation }) => {
     }
 
     return (
-        <KeyboardAvoidingView behavior='padding' style={styles.container} >
-            <StatusBar style='light' />
-            <Text h3 style={{ marginBottom: 15}}>
-                Create a Signal account
-            </Text>
-            <View style={styles.inputContainer}>
-                <Input 
-                    placeholder="Full Name"
-                    autoFocus
-                    type='text'
-                    value={name}
-                    onChangeText={ (text) => setName(text)}
+        <SafeAreaView behavior='padding' style={styles.container} >
+            <ScrollView>
+                <StatusBar style='light' />
+                <Text h3 style={{ marginBottom: 15, alignSelf: 'center', marginTop: 30}}>
+                    Create a Signal account
+                </Text>
+                <View style={styles.inputContainer}>
+                    <Input 
+                        placeholder="Full Name"
+                        autoFocus
+                        type='text'
+                        value={name}
+                        onChangeText={ (text) => setName(text)}
+                    />
+                    <Input 
+                        placeholder="Email"
+                        type='email'
+                        value={email}
+                        onChangeText={ (text) => setEmail(text)}
+                    />
+                    <Input 
+                        placeholder="Password"
+                        type='password'
+                        secureTextEntry
+                        value={password}
+                        onChangeText={ (text) => setPassword(text)}
+                    />
+                    <Input 
+                        placeholder="Birth"
+                        type='text'
+                        value={birth}
+                        onChangeText={ (text) => setBirth(text)}
+                    />
+                    <Input 
+                        placeholder="Profile Picture URL"
+                        type='text'
+                        value={imageUrl}
+                        onChangeText={ (text) => setImageUrl(text)}
+                        onSubmitEditing={register}
+                    />
+                </View>
+                <Button 
+                    containerStyle={styles.button}
+                    raised 
+                    onPress={ register } 
+                    title='Register' 
                 />
-                <Input 
-                    placeholder="Email"
-                    type='email'
-                    value={email}
-                    onChangeText={ (text) => setEmail(text)}
-                />
-                <Input 
-                    placeholder="Password"
-                    type='password'
-                    secureTextEntry
-                    value={password}
-                    onChangeText={ (text) => setPassword(text)}
-                />
-                <Input 
-                    placeholder="Birth"
-                    type='text'
-                    value={birth}
-                    onChangeText={ (text) => setBirth(text)}
-                />
-                <Input 
-                    placeholder="Profile Picture URL"
-                    type='text'
-                    value={imageUrl}
-                    onChangeText={ (text) => setImageUrl(text)}
-                    onSubmitEditing={register}
-                />
-            </View>
-            <Button 
-                containerStyle={styles.button}
-                raised 
-                onPress={ register } 
-                title='Register' 
-            />
-            <View style={{ height: 80}} />
-        </KeyboardAvoidingView>
+                <View style={{ height: 80}} />
+            </ScrollView>
+        </SafeAreaView>
     ) 
 }
 
@@ -96,5 +99,6 @@ const styles = StyleSheet.create({
     },
     button: {
         width: 200,
+        alignSelf: 'center'
     },
 })

@@ -4,6 +4,7 @@ import { Text, Button, Input } from 'react-native-elements'
 import { KeyboardAvoidingView } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import { db, auth} from "../firebase"
+import { ScrollView, SafeAreaView } from 'react-native';
 // import { TouchableOpacity } from 'react-native';
 // import { AntDesign,SimpleLineIcons } from "@expo/vector-icons"
 
@@ -48,53 +49,55 @@ const AddProductScreen = ({ route, navigation }) => {
     }
 
     return (
-        <KeyboardAvoidingView behavior='padding' style={styles.container} >
-            <StatusBar style='light' />
-            <Text h3 style={{ marginBottom: 15}}>
-                Update Product 
-            </Text>
-            <View style={styles.inputContainer}>
-                    <Input 
-                        placeholder="Name"
-                        autoFocus
-                        type='text'
-                        value={name}
-                        onChangeText={ (text) => setName(text)}
-                    />
-                    <Input 
-                        placeholder="Description"
-                        type='text'
-                        value={description}
-                        onChangeText={ (text) => setDescription(text)}
-                    />
-                    <Input 
-                        placeholder="Price"
-                        type='text'
-                        value={price}
-                        onChangeText={ (text) => setPrice(text)}
-                    />
-                    <Input 
-                        placeholder="Picture URL"
-                        type='text'
-                        value={imageUrl}
-                        onChangeText={ (text) => setImageUrl(text)}
-                    />
-                    {/* <TouchableOpacity 
-                            onPress={updateImageActivation} 
-                            activeOpacity={0.5}
-                        >
-                            <AntDesign name="check" size={30} color={imageUrl.length > 2 ? 'green' : 'red'} />
-                    </TouchableOpacity> */}
-            </View>
-            <Button 
-                containerStyle={styles.button}
-                raised 
-                onPress={updateProduct} 
-                title='Update Product'
-                disabled={!name} 
-            />
-            <View style={{ height: 60}} />
-        </KeyboardAvoidingView>
+        <SafeAreaView behavior='padding' style={styles.container} >
+            <ScrollView>
+                <StatusBar style='light' />
+                <Text h3 style={{ marginBottom: 15, alignSelf: 'center', marginTop: 30}}>
+                    Update Product 
+                </Text>
+                <View style={styles.inputContainer}>
+                        <Input 
+                            placeholder="Name"
+                            autoFocus
+                            type='text'
+                            value={name}
+                            onChangeText={ (text) => setName(text)}
+                        />
+                        <Input 
+                            placeholder="Description"
+                            type='text'
+                            value={description}
+                            onChangeText={ (text) => setDescription(text)}
+                        />
+                        <Input 
+                            placeholder="Price"
+                            type='text'
+                            value={price}
+                            onChangeText={ (text) => setPrice(text)}
+                        />
+                        <Input 
+                            placeholder="Picture URL"
+                            type='text'
+                            value={imageUrl}
+                            onChangeText={ (text) => setImageUrl(text)}
+                        />
+                        {/* <TouchableOpacity 
+                                onPress={updateImageActivation} 
+                                activeOpacity={0.5}
+                            >
+                                <AntDesign name="check" size={30} color={imageUrl.length > 2 ? 'green' : 'red'} />
+                        </TouchableOpacity> */}
+                </View>
+                <Button 
+                    containerStyle={styles.button}
+                    raised 
+                    onPress={updateProduct} 
+                    title='Update Product'
+                    disabled={!name} 
+                />
+                <View style={{ height: 60}} />
+            </ScrollView>
+        </SafeAreaView>
     ) 
 }
 
@@ -113,5 +116,6 @@ const styles = StyleSheet.create({
     },
     button: {
         width: 200,
+        alignSelf: 'center'
     },
 })

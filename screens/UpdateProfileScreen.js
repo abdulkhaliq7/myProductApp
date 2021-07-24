@@ -7,22 +7,24 @@ import { KeyboardAvoidingView } from 'react-native'
 import { Button, Input } from 'react-native-elements'
 import { StatusBar } from 'expo-status-bar';
 import { AntDesign } from "@expo/vector-icons"
+import { ScrollView, SafeAreaView } from 'react-native';
 
 
 const UpdateProfileScreen = ({navigation }) => {
+    const signOutUser = () => {
+        auth.signOut().then( () => {
+            navigation.replace('Login')
+        })
+    }
+    
     const [username, setUsername] = useState(auth?.currentUser?.displayName)
     const [image, setImage] = useState(auth?.currentUser?.photoURL)
     const [birth, setBirth] = useState(auth?.currentUser?.phoneNumber)
 
     
-    {console.log(auth?.currentUser)}
+    // {console.log(auth?.currentUser)}
 
-
-
-
-
-
-    {console.log(username)}
+    // {console.log(username)}
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -42,11 +44,6 @@ const UpdateProfileScreen = ({navigation }) => {
         })
     }, [navigation])
 
-    const signOutUser = () => {
-        auth.signOut().then( () => {
-            navigation.replace('Login')
-        })
-    }
 
     const update = async () => {
         await auth?.currentUser?.updateProfile({
@@ -60,35 +57,39 @@ const UpdateProfileScreen = ({navigation }) => {
     
 
     return (
-        <KeyboardAvoidingView behavior='padding'  style={styles.container}>
-            {/* <StatusBar style='light' />  */}
-            <Avatar rounded size='xlarge' source={{ uri: auth?.currentUser?.photoURL}} />
-            <Text style={{ fontSize: 17 , marginTop: 10, marginBottom: 10 }} >{auth?.currentUser?.displayName}</Text>
-            <View style={styles.inputContainer}>
-                <Input 
-                    placeholder='Username' 
-                    outoFocus 
-                    type='text' 
-                    value={username} 
-                    onChangeText={ (text) => setUsername(text) } 
-                /> 
-                <Input 
-                    placeholder='Enter the year you born ex: 2030' 
-                    outoFocus 
-                    type='text' 
-                    value={birth} 
-                    onChangeText={ (text) => setBirth(text) } 
-                /> 
-                <Input 
-                    placeholder='Image'  
-                    type='text' 
-                    value={ image } 
-                    onChangeText={ (text) => setImage(text) } 
-                />
-            </View>
-            <Button containerStyle={styles.button}  onPress={ update }   title='Update Profile'  />
-            <View style={{ height: 100 }} />
-        </KeyboardAvoidingView>
+        <SafeAreaView >
+            <ScrollView>
+                <KeyboardAvoidingView behavior='padding'  style={styles.container}>
+                {/* <StatusBar style='light' />  */}
+                <Avatar   rounded size='xlarge' source={{ uri: auth?.currentUser?.photoURL}} />
+                <Text style={{ fontSize: 17 , marginTop: 10, marginBottom: 10 }} >{auth?.currentUser?.displayName}</Text>
+                <View style={styles.inputContainer}>
+                    <Input 
+                        placeholder='Username' 
+                        outoFocus 
+                        type='text' 
+                        value={username} 
+                        onChangeText={ (text) => setUsername(text) } 
+                    /> 
+                    <Input 
+                        placeholder='Enter the year you born ex: 2030' 
+                        outoFocus 
+                        type='text' 
+                        value={birth} 
+                        onChangeText={ (text) => setBirth(text) } 
+                    /> 
+                    <Input 
+                        placeholder='Image'  
+                        type='text' 
+                        value={ image } 
+                        onChangeText={ (text) => setImage(text) } 
+                    />
+                </View>
+                <Button containerStyle={styles.button}  onPress={ update }   title='Update Profile'  />
+                <View style={{ height: 100 }} />
+                </KeyboardAvoidingView>
+            </ScrollView>
+        </SafeAreaView>
     )
 }
 

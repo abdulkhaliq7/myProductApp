@@ -21,7 +21,7 @@ const HomeScreen = ( { navigation }) => {
             return total + price.data
         }, 0)
         setTotalPrice(totalPrices)
-        console.log(totalPrice)
+        // console.log(totalPrice)
     }, [totalProduct])
     
 
@@ -92,37 +92,6 @@ const HomeScreen = ( { navigation }) => {
             headerStyle: { backgroundColor: "#fff"},
             headerTitleStyle: { color: "black"},
             headerTintColor: "black",
-            // headerLeft: () => (
-            //     <View style={{ marginLeft:10, flexDirection: 'row', alignItems: 'center' }} >
-            //         <TouchableOpacity onPress={() => navigation.navigate('UpdateProfile')}  activeOpacity={0.5}>
-            //             <Avatar rounded source={{ uri: auth?.currentUser?.photoURL }} />
-            //         </TouchableOpacity>
-            //         <TouchableOpacity onPress={() => navigation.navigate('UpdateProfile', products)}  style={{ paddingLeft: 5}}  activeOpacity={0.5}>
-            //             <Text>{auth?.currentUser?.displayName}</Text>
-            //         </TouchableOpacity>
-            //     </View>
-            // ),
-
-            // headerRight: () => (
-            //     <View style={{
-            //         flexDirection: "row",
-            //         justifyContent:'space-between',
-            //         width: 80,
-            //         marginRight: 20,
-            //     }}>
-            //         <TouchableOpacity 
-            //             onPress={() => navigation.navigate('dashboard')} 
-            //             activeOpacity={0.5}>
-            //             <AntDesign name="shoppingcart" size={24} color= "black" />
-            //         </TouchableOpacity>
-            //         <TouchableOpacity 
-            //             onPress={() => navigation.navigate('AddProduct')} 
-            //             activeOpacity={0.5}
-            //         >
-            //             <SimpleLineIcons name="plus" size={24} color="black" />
-            //         </TouchableOpacity>
-            //     </View>
-            // )
         })
     }, [navigation])
 

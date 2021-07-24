@@ -47,6 +47,7 @@ const HomeScreen = ( { navigation }) => {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "MyProudcts",
+            headerTitleAlign: 'center',
             headerStyle: { backgroundColor: "#fff"},
             headerTitleStyle: { color: "black"},
             headerTintColor: "black",

@@ -4,6 +4,7 @@ import { Text, Button, Input } from 'react-native-elements'
 import { KeyboardAvoidingView } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import { db,auth } from "../firebase"
+import { ScrollView, SafeAreaView } from 'react-native';
 
 const AddProductScreen = ({ navigation }) => {
     const [name, setName] = useState("")
@@ -38,48 +39,50 @@ const AddProductScreen = ({ navigation }) => {
     }
 
     return (
-        <KeyboardAvoidingView behavior='padding' style={styles.container} >
-            <StatusBar style='light' />
-            <Text h3 style={{ marginBottom: 15}}>
-                Add new Product 
-            </Text>
-            <View style={styles.inputContainer}>
-                <Input 
-                    placeholder="Name"
-                    autoFocus
-                    type='text'
-                    value={name}
-                    onChangeText={ (text) => setName(text)}
+        <SafeAreaView behavior='padding' style={styles.container} >
+            <ScrollView>
+                <StatusBar style='light' />
+                <Text h3 style={{ marginBottom: 15, alignSelf: 'center', marginTop: 30}}>
+                    Add new Product 
+                </Text>
+                <View style={styles.inputContainer}>
+                    <Input 
+                        placeholder="Name"
+                        autoFocus
+                        type='text'
+                        value={name}
+                        onChangeText={ (text) => setName(text)}
+                    />
+                    <Input 
+                        placeholder="Description"
+                        type='text'
+                        value={description}
+                        onChangeText={ (text) => setDescription(text)}
+                    />
+                    <Input 
+                        placeholder="Price"
+                        type='text'
+                        value={price}
+                        onChangeText={ (text) => setPrice(text)}
+                    />
+                    <Input 
+                        placeholder="Picture URL"
+                        type='text'
+                        value={imageUrl}
+                        onSubmitEditing={addProduct}
+                        onChangeText={ (text) => setImageUrl(text)}
+                    />
+                </View>
+                <Button 
+                    containerStyle={styles.button}
+                    raised 
+                    onPress={addProduct} 
+                    title='Add Product'
+                    // disabled={!name} 
                 />
-                <Input 
-                    placeholder="Description"
-                    type='text'
-                    value={description}
-                    onChangeText={ (text) => setDescription(text)}
-                />
-                <Input 
-                    placeholder="Price"
-                    type='text'
-                    value={price}
-                    onChangeText={ (text) => setPrice(text)}
-                />
-                <Input 
-                    placeholder="Picture URL"
-                    type='text'
-                    value={imageUrl}
-                    onSubmitEditing={addProduct}
-                    onChangeText={ (text) => setImageUrl(text)}
-                />
-            </View>
-            <Button 
-                containerStyle={styles.button}
-                raised 
-                onPress={addProduct} 
-                title='Add Product'
-                // disabled={!name} 
-            />
-            <View style={{ height: 40}} />
-        </KeyboardAvoidingView>
+                <View style={{ height: 40}} />
+            </ScrollView>
+        </SafeAreaView>
     ) 
 }
 
@@ -98,5 +101,6 @@ const styles = StyleSheet.create({
     },
     button: {
         width: 200,
+        alignSelf: 'center'
     },
 })
